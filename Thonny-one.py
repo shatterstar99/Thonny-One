@@ -24,27 +24,44 @@ def random(limit):
 #and returns a random value between 1 and the input.
 
 def dealCards(gambler):
-    gambler.append([Deck[random(len(Deck))][random(4)]])
+    chosen_card = random(len(Deck))
+    chosen_color = random(4)
+    gambler.append([Deck[chosen_card][chosen_color]])
+    valueofCards(gambler)
+    #print(f"{gambler[-1][-1]} of {gambler[-1][-2]}")
     #Add a drew this card message
     
 #Deals out random cards from the deck and stores
 #in specified list
     
 def valueofCards(gambler):
+    global Dealervalue
+    global Dealerstring
     global Playervalue
+    global Playerstring
+    
+    if gambler == Dealer:
+        current_value = Dealervalue
+        current_string = Dealerstring
+    elif gambler == Player:
+        current_value = Playervalue
+        current_string = Playerstring
+        
     for tpl in gambler:
-        gambler+string.append(f"{tpl[-1]} of {tpl[-2]}")
+        card_string = (f"{tpl[0][-1]} of {tpl[0][-2]}")
+        if card_string not in current_string:
+            current_string.append(card_string)
         #Supposed to store the strings of tuple in list
         #to print it out later
         if len(tpl[0]) > 3: #Only the Ace tuples are longer than 3
-            if Playervalue + tpl[0][1] > 21:
-                Playervalue += tpl[0][0]
+            if current_value+ tpl[0][1] > 21:
+                current_value += tpl[0][0]
                 #if player would become bust when 11 is added,adds the value 1 instead,
             else:
-                Playervalue += tpl[0][1]
+                current_value += tpl[0][1]
                 #Otherwise Ace adds 11 points.
         else:
-            Playervalue += tpl[0][0]
+            current_value += tpl[0][0]
     
 def hitorStay(Player):
     print("Do you want to hit or stay?")
@@ -63,13 +80,13 @@ def hitorStay(Player):
 def hitorStayNPC(NPC):
     #Try to make it so NPC string combine with value
     #So that we get tex: Dealervalue when we input Dealer
-    if Dealervalue < 15 and > 10:
+    if Dealervalue < 15 and Dealervalue > 10:
         Hitchance = (2)
         #50% chance of drawing another card
     elif Dealervalue > 15:
         Hitchance = (4)
         #25% chance of drawing another card
-    elif Dealervalue > 17 and < 20
+    elif Dealervalue > 17 and Dealervalue < 20:
         Hitchance = (100)
         #1% chance of drawing another card
     
