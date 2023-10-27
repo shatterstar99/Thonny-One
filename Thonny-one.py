@@ -41,10 +41,10 @@ def valueofCards(gambler):
     global Playerstring
     
     if gambler == Dealer:
-        current_value = Dealervalue
+        current_value = 0
         current_string = Dealerstring
     elif gambler == Player:
-        current_value = Playervalue
+        current_value = 0
         current_string = Playerstring
         
     for tpl in gambler:
@@ -62,6 +62,11 @@ def valueofCards(gambler):
                 #Otherwise Ace adds 11 points.
         else:
             current_value += tpl[0][0]
+    if gambler == Dealer:
+        Dealervalue = current_value
+    elif gambler == Player:
+        Playervalue = current_value
+    
     
 def hitorStay(Player):
     print("Do you want to hit or stay?")
