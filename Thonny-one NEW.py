@@ -25,17 +25,20 @@ def random(limit):
 
 def dealCards(gambler):
     chosen_card = random(len(Deck))
-    chosen_color = random(4)
+    chosen_color = random(len(Deck[chosen_card])-1)
     gambler.append([Deck[chosen_card][chosen_color]])
-    #(Deck[chosen_card]).remove(chosen_color)
-    #removes the card from the dictionary after being drawn.
+    drawncard = Deck[chosen_card][chosen_color]
+        #removes the card from the dictionary after being drawn.
 
     if gambler == Player:
         print(f"Player is dealt {Deck[chosen_card][chosen_color][-1]} of {Deck[chosen_card][chosen_color][-2]}")
     elif gambler == Dealer:
         print(f"Dealer is dealt {Deck[chosen_card][chosen_color][-1]} of {Deck[chosen_card][chosen_color][-2]}")
         
+    (Deck[chosen_card]).remove(drawncard)
+    #removes the card from the dictionary after being drawn.
     valueofCards(gambler)
+    
     
 #Deals out random cards from the deck and stores
 #in specified list
@@ -195,7 +198,6 @@ def newGame():
         print("Maybe next time. Have a good day.")
     else:
         print("Sorry was that a yes or a no?")
-        
 newGame()        
     
     
